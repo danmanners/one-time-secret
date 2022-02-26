@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 
 	"github.com/google/uuid"
 
@@ -59,11 +60,20 @@ func main() {
 	//Get Secret
 	r.Get("/{secret}", func(w http.ResponseWriter, r *http.Request) {
 		data := chi.URLParam(r, "secret")
-		fmt.Printf("'%s' fetch was attempted.\n", data)
 		s := secrets[data]
 		if s != "" {
-			w.Write([]byte(fmt.Sprintf("%s\n", s)))
+			if u, err := url.ParseRequestURI(s); err == nil {
+				// If the secret is a URL, redirect to that mo'fo.
+
+				http.Redirect(w, r, u.String(), http.StatusTemporaryRedirect)
+			} else {
+				// If the secret is _NOT_ a URL, return it to the request.
+				w.WriteHeader(http.StatusOK)
+				w.Write([]byte(fmt.Sprintf("%s\n", s)))
+			}
+
 		} else {
+			w.WriteHeader(http.StatusNotFound)
 			w.Write([]byte(fmt.Sprintf("'%s' no longer or has never existed.\n", data)))
 		}
 		// Kill the secret
