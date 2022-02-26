@@ -2,6 +2,17 @@
 
 This project is loosely based on my [Non-Disclosure-Agreement](https://github.com/danmanners/non-disclosure-agreement) Python project, but written in Go.
 
+## What it can do
+
+- Store text
+- Store URLs and redirect
+- Store whatever you want
+
+## What it cannot do
+
+- Be highly-available
+- Persistently store anything
+
 ## To-Do
 
 - [ ] Add in Multiple User-Selectable Backends
