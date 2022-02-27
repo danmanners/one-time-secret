@@ -13,6 +13,14 @@ This project is loosely based on my [Non-Disclosure-Agreement](https://github.co
 - Be highly-available
 - Persistently store anything
 
+## Building
+
+You can build this shitty software with:
+
+```bash
+go build -o ots main.go
+```
+
 ## To-Do
 
 - [ ] Add in Multiple User-Selectable Backends
