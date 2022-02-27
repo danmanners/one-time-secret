@@ -15,11 +15,14 @@ import (
 // Main Function
 func main() {
 	r := chi.NewRouter()
-	r.Use(middleware.Logger)
-	r.Use(middleware.Recoverer)
-	r.Use(middleware.URLFormat)
-	r.Use(middleware.RealIP)
-	r.Use(render.SetContentType(render.ContentTypeJSON))
+	r.Use(
+		middleware.Logger,
+		middleware.Recoverer,
+		middleware.URLFormat,
+		middleware.RealIP,
+		middleware.URLFormat,
+		render.SetContentType(render.ContentTypeJSON),
+	)
 
 	// Offer up a pong response to check if things are responsive
 	r.Get("/ping", routes.Ping)

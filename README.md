@@ -18,7 +18,15 @@ This project is loosely based on my [Non-Disclosure-Agreement](https://github.co
 You can build this shitty software with:
 
 ```bash
+# Build the binary
 go build -o ots main.go
+```
+
+Or, you can build it with `docker` or `podman`:
+
+```bash
+# Build Container
+sudo podman build -t ghcr.io/danmanners/ots:$(git rev-parse --short HEAD) .
 ```
 
 ## To-Do
