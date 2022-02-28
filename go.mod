@@ -1,4 +1,4 @@
-module github.com/danmanners/go-learning
+module github.com/danmanners/one-time-secret
 
 go 1.17
 

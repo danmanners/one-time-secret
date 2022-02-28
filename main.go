@@ -8,12 +8,15 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/render"
 
-	"github.com/danmanners/go-learning/functions"
-	"github.com/danmanners/go-learning/routes"
+	"github.com/danmanners/one-time-secret/functions"
+	"github.com/danmanners/one-time-secret/routes"
 )
 
 // Main Function
 func main() {
+	// Check if an AES string was provided or not
+
+	// Set up the Chi Router
 	r := chi.NewRouter()
 	r.Use(
 		middleware.Logger,
@@ -30,9 +33,13 @@ func main() {
 	// Create a secret from a data post
 	r.Post("/secret", routes.CreateSecret)
 
-	//Get Secret
+	// Get Secret
 	r.Get("/{secret}", routes.GetSecret)
 
-	listeningPort := functions.GetEnv("tapi_port", "3000")
+	// Catchall
+	r.Get("/", routes.Catchall)
+
+	// Listening Port
+	listeningPort := functions.GetEnv("ots_port", "3000")
 	http.ListenAndServe(fmt.Sprintf(":%s", listeningPort), r)
 }
